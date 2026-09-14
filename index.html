@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raster fade fix comparison</title>
+<h1>Raster fade fix comparison</h1>
+<p>
+<button id="run" disabled>Reproduce issue</button>
+<button id="reset" disabled>Reset maps</button>
+<span id="status" role="status">Loading builds…</span>
+</p>
+<table width="100%">
+<thead><tr>
+<th>Before <code id="before-ref"></code></th>
+<th><a href="https://github.com/Kanahiro/maplibre-gl-js/tree/codex/fix-raster-fade-stall" target="_blank" rel="noopener noreferrer">codex/fix-raster-fade-stall</a> <code id="after-ref"></code></th>
+</tr></thead>
+<tbody>
+<tr>
+<td width="50%"><iframe title="Map before the fix" src="map.html?version=before" width="100%" height="480"></iframe></td>
+<td width="50%"><iframe title="Map after the fix" src="map.html?version=after" width="100%" height="480"></iframe></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reproduce issue:</strong> Reset to zoom 4, freeze time while zooming to 5 so the first tile opacity is 0, then advance 400 ms to check that the 300 ms fade finishes.</p>
+<script type="module" src="app.js"></script>
+</html>

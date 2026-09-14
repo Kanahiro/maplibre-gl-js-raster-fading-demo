@@ -1,0 +1,10 @@
+{
+  "name": "maplibre-raster-fading-demo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:maps": "node scripts/build-maps.mjs",
+    "start": "node scripts/serve.mjs",
+    "verify": "node scripts/verify.mjs"
+  }
+}
