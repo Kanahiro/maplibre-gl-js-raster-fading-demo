@@ -22,5 +22,31 @@
 </tbody>
 </table>
 <p><strong>Reproduce issue:</strong> Reset to zoom 4, freeze time while zooming to 5 so the first tile opacity is 0, then advance 400 ms to check that the 300 ms fade finishes.</p>
+<pre><code>// Start with a fresh map at zoom 4 and raster-fade-duration: 300.
+await map.once(&#x27;idle&#x27;);
+
+const t = maplibregl.now();
+maplibregl.setNow(t);
+
+const firstDraw = new Promise(resolve =&gt; {
+    function onRender() {
+        if (!map.isSourceLoaded(&#x27;osm&#x27;)) return;
+        map.off(&#x27;render&#x27;, onRender);
+        resolve();
+    }
+    map.on(&#x27;render&#x27;, onRender);
+});
+
+map.setZoom(5);
+await firstDraw;
+
+maplibregl.setNow(t + 400);
+for (let i = 0; i &lt; 2; i++) {
+    const rendered = map.once(&#x27;render&#x27;);
+    map.triggerRepaint();
+    await rendered;
+}
+
+maplibregl.restoreNow();</code></pre>
 <script type="module" src="app.js"></script>
 </html>
