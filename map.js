@@ -34,6 +34,7 @@ function createMap(zoom = 4, fadeDuration = 300) {
             attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors'
         }}, layers: [{id: 'osm', type: 'raster', source: 'osm', paint: {'raster-fade-duration': fadeDuration}}]}
     });
+    map.addControl(new gl.NavigationControl({showCompass: false}), 'top-right');
     map.on('error', event => {lastError = event.error.message;});
     map.on('render', () => renderCount++);
     map.on('move', () => {
